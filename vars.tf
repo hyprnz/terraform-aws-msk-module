@@ -124,6 +124,11 @@ variable "create_dashboard" {
   default     = "false"
 }
 
+variable "custom_dashboard_template" {
+  description = "Location for the custom MSK Dashboard template"
+  default     = ""
+}
+
 ## VPC
 
 variable "create_vpc" {

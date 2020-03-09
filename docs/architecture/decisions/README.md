@@ -5,3 +5,4 @@
 * [3. Internal VPC](0003-internal-vpc.md)
 * [4. Configurable Internal VPC](0004-configurable-internal-vpc.md)
 * [5. Feature Flags](0005-feature-flags.md)
+* [6. CloudWatch Dashboards](0006-cloudwatch-dashboards.md)
