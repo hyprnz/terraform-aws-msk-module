@@ -82,12 +82,19 @@ module "msk" {
   cluster_name = "MSK-Test-Cluster"
 
   ## Uncomment this line to use the custom dashboard template
+  enhanced_monitoring_level = "PER_BROKER"
   custom_dashboard_template = "templates/dashboard-custom.tpl"
 }
 ```
 
 Here we are setting the custom dashboard using a template file in this example
-directory. This will replace the default template when used.
+directory. This will replace the default template when used with a custom
+Dashboard that leverages the `PER_BROKER` enhanced monitoring level to provide
+an `Under Replicated` partitions metric in addition to the default Dashboard.
+
+The Default Dashboard only uses metrics available at the "DEFAULT" monitoring
+level, so this ability with the custom dashboard enables users to add metrics to
+the dashboard that are only available at other monitoring levels.
 
 ## Regional Support
 By default the AWS resources for this example will be created in

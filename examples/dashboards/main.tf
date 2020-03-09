@@ -14,6 +14,7 @@ module "msk" {
 
   cluster_name = "MSK-Test-Cluster"
 
-  ## Uncomment this line to use the custom dashboard template
+  ## Uncomment these lines to use the custom dashboard template
+  # enhanced_monitoring_level = "PER_BROKER"
   # custom_dashboard_template = "templates/dashboard-custom.tpl"
 }

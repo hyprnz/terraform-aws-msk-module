@@ -23,7 +23,7 @@
                 ],
                 "region": "${region}",
                 "period": 300,
-                "title": "Offline Partions Custom"
+                "title": "Offline Partions"
             }
         },
         {
@@ -148,6 +148,26 @@
                 ],
                 "region": "${region}",
                 "title": "Average Zookeeper request latency (ms)"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 0,
+            "y": 9,
+            "width": 6,
+            "height": 3,
+            "properties": {
+                "metrics": [
+                    [ { "expression": "SUM([m1,m2,m3])", "label": "UnderReplicated", "id": "total" } ],
+                    [ "AWS/Kafka", "UnderReplicatedPartitions", "Cluster Name", "${cluster_name}", "Broker ID", "1", { "id": "m1", "visible": false } ],
+                    [ "...", "2", { "id": "m2", "visible": false } ],
+                    [ "...", "3", { "id": "m3", "visible": false } ]
+                ],
+                "view": "singleValue",
+                "region": "${region}",
+                "stat": "Maximum",
+                "period": 300,
+                "title": "Under Replicated"
             }
         }
     ]
