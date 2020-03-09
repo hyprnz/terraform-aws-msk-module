@@ -64,6 +64,7 @@ avoid confusion.
 In order to use a custom CloudWatch Dashboard an additional
 `custom_dashboard_template` variable needs to be set.
 
+```
 module "msk" {
   source = "../../"
 
@@ -83,6 +84,7 @@ module "msk" {
   ## Uncomment this line to use the custom dashboard template
   custom_dashboard_template = "templates/dashboard-custom.tpl"
 }
+```
 
 Here we are setting the custom dashboard using a template file in this example
 directory. This will replace the default template when used.
