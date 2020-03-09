@@ -15,13 +15,13 @@ This module supports the following MSK cluster configurations:
 3. MSK Cluster with an External VPC
 4. MSK Cluster using a Custom Kafka Broker Configuration
 5. MSK Cluster using Client Authentication
+6. MSK Cluster with CloudWatch Dashboard
 
 These are implemented using feature flags. For information on how to configure
 the MSK cluster in these configurations see the [examples](./examples)
 directory.
 
 ## Providers                                                                                                                                                                                                
-                                                                                                                                                                                                            
 | Name | Version |                                                                                                                                                                                          
 |------|---------|                                                                                                                                                                                          
 | aws | ~> 2.40 |                                                                                                                                                                                           
@@ -41,6 +41,7 @@ directory.
 | create\_vpc | Whether or not to create the MKS VPC | `string` | `"true"` | no |
 | custom\_configuration\_description | Description of the MSK Custom configuration | `string` | `"Custom MSK Configuration Example properties"` | no |
 | custom\_configuration\_name | Name of the MSK Custom configuration | `string` | `"Custom-MSK-Configuration-Example"` | no |
+| custom\_dashboard\_template | Location for the custom MSK Dashboard template | `string` | `""` | no |
 | encryption\_kms\_key\_arn | KMS key short ID or ARN to use for encrypting your data at rest. If no key is specified an AWS managed KMS key will be used for encrypting the data at rest | `string` | `""`
 | no |
 | enhanced\_monitoring\_level | Desired enhanced MSK CloudWatch monitoring level | `string` | `"DEFAULT"` | no |
@@ -65,6 +66,7 @@ directory.
 | arn | The ARN for the MSK Cluster |
 | bootstrap\_brokers | Connection host:port pairs |
 | client\_authentication | Certificate authority arns used for client authentication |
+| cloudwatch\_dashboard\_arn | The ARN of the MSK Cloudwatch dashboard |
 | custom\_configuration\_arn | Custom configuration ARN |
 | custom\_configuration\_latest\_revision | The latest revision of the MSK custom configuration |
 | encryption\_at\_rest\_kms\_key\_arn | The ARN of the KMS key used for encryption at rest of the broker data volume |

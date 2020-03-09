@@ -10,6 +10,7 @@ This module supports the following MSK cluster configurations:
 3. [MSK Cluster with an External VPC](./no-vpc-cluster)
 4. [MSK Cluster using a Custom Kafka Broker Configuration](./custom-config-cluster)
 5. [MSK Cluster using Client Authentication](./default-ca-cluster)
+6. [MSK Cluster with CloudWatch Dashboard](./dashboards)
 
 Here you will find an example for each of these configurations.
 

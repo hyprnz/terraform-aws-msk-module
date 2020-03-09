@@ -60,3 +60,9 @@ output "custom_configuration_latest_revision" {
   value       = "${aws_msk_configuration.this.*.latest_revision}"
   depends_on  = ["${aws_msk_configuration.this}"]
 }
+
+output "cloudwatch_dashboard_arn" {
+  description = "The ARN of the MSK Cloudwatch dashboard"
+  value       = "${aws_cloudwatch_dashboard.msk.*.dashboard_arn}"
+  depends_on  = ["${aws_cloudwatch_dashboard.msk}"]
+}
