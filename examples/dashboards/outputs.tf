@@ -42,3 +42,8 @@ output "msk_cloudwatch_dashboard_arn" {
   description = "The ARN of the MSK Cloudwatch Dashboard"
   value       = "${module.msk.cloudwatch_dashboard_arn}"
 }
+
+output "msk_cloudwatch_metric_alarm_arn" {
+  description = "The ARN of the Broker Diskspace CloudWatch Alarm for the MSK Cluster"
+  value       = "${module.msk.cloudwatch_diskspace_alarm_arn}"
+}

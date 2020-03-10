@@ -129,6 +129,11 @@ variable "custom_dashboard_template" {
   default     = ""
 }
 
+variable "create_diskspace_cw_alarm" {
+  description = "Whether or not to create a Broker Diskspace CloudWatch Alarm"
+  default     = "false"
+}
+
 ## VPC
 
 variable "create_vpc" {
