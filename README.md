@@ -6,6 +6,19 @@ VPC to run the Broker instances in. This module provides an [Internal VPC](./mod
 simplify provisioning the MSK Cluster. This Internal VPC can be configured to
 ensure it does not collide with any existing VPCs.
 
+By default all data is encrypted at rest using an [AWS managed
+CMK](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk).
+Users may provide their own key if they don't wish to use the AWS managed key.
+All data in transit is encrypted using TLS between the brokers.
+
+A CloudWatch MSK Cluster Dashboard and CloudWatch Broker Data Log Disk Usage
+Alarm are optional resources available with this module. A default CloudWatch
+Dashboard is provided, but a custom Dashboard may also be provided. This enables
+clusters using enhanced monitoring to add additional metrics to the Dashboard.
+The CloudWatch Alarm is provided for each of the brokers in the MSK cluster to
+warn of Broker Disk Usage greater than 85% as per the [best
+practices](https://docs.aws.amazon.com/msk/latest/developerguide/bestpractices.html).
+
 ## Features & Examples
 
 This module supports the following MSK cluster configurations:
@@ -16,10 +29,12 @@ This module supports the following MSK cluster configurations:
 4. MSK Cluster using a Custom Kafka Broker Configuration
 5. MSK Cluster using Client Authentication
 6. MSK Cluster with CloudWatch Dashboard
+7. MSK Cluster with CloudWatch Broker Data Log Disk Usage Alarm
 
 These are implemented using feature flags. For information on how to configure
 the MSK cluster in these configurations see the [examples](./examples)
-directory.
+directory. Flags can be combined, such as enabling both the CloudWatch Dashboard
+and the CloudWatch Broker Data Log Disk Usage Alarm.
 
 ## Providers                                                                                                                                                                                                
 | Name | Version |                                                                                                                                                                                          
@@ -37,6 +52,7 @@ directory.
 | client\_subnets | A list of subnets to connect to in the client VPC | `list` | `[]` | no |
 | cluster\_name | Name of the MSK Cluster | `string` | n/a | yes |
 | create\_dashboard | Whether or not to create the MSK Dashboard | `string` | `"false"` | no |
+| create\_diskspace\_cw\_alarm | Whether or not to create a Broker Diskspace CloudWatch Alarm | `string` | `"false"` | no |
 | create\_msk\_cluster | Whether or not to create the MSK Cluster | `string` | `"true"` | no |
 | create\_vpc | Whether or not to create the MKS VPC | `string` | `"true"` | no |
 | custom\_configuration\_description | Description of the MSK Custom configuration | `string` | `"Custom MSK Configuration Example properties"` | no |
@@ -67,6 +83,8 @@ directory.
 | bootstrap\_brokers | Connection host:port pairs |
 | client\_authentication | Certificate authority arns used for client authentication |
 | cloudwatch\_dashboard\_arn | The ARN of the MSK Cloudwatch dashboard |
+| cloudwatch\_diskspace\_alarm\_arn | The ARN of the Broker Diskspace CloudWatch Alarm for the MSK Cluster |
+| cloudwatch\_diskspace\_alarm\_id | The ID of the Broker Diskspace CloudWatch Alarm for the MSK Cluster |
 | custom\_configuration\_arn | Custom configuration ARN |
 | custom\_configuration\_latest\_revision | The latest revision of the MSK custom configuration |
 | encryption\_at\_rest\_kms\_key\_arn | The ARN of the KMS key used for encryption at rest of the broker data volume |

@@ -66,3 +66,15 @@ output "cloudwatch_dashboard_arn" {
   value       = "${aws_cloudwatch_dashboard.msk.*.dashboard_arn}"
   depends_on  = ["${aws_cloudwatch_dashboard.msk}"]
 }
+
+output "cloudwatch_diskspace_alarm_arn" {
+  description = "The ARN of the Broker Diskspace CloudWatch Alarm for the MSK Cluster"
+  value       = "${aws_cloudwatch_metric_alarm.msk_broker_disk_space.*.arn}"
+  depends_on  = ["${aws_cloudwatch_metric_alarm.msk_broker_disk_space}"]
+}
+
+output "cloudwatch_diskspace_alarm_id" {
+  description = "The ID of the Broker Diskspace CloudWatch Alarm for the MSK Cluster"
+  value       = "${aws_cloudwatch_metric_alarm.msk_broker_disk_space.*.id}"
+  depends_on  = ["${aws_cloudwatch_metric_alarm.msk_broker_disk_space}"]
+}

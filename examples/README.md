@@ -11,6 +11,7 @@ This module supports the following MSK cluster configurations:
 4. [MSK Cluster using a Custom Kafka Broker Configuration](./custom-config-cluster)
 5. [MSK Cluster using Client Authentication](./default-ca-cluster)
 6. [MSK Cluster with CloudWatch Dashboard](./dashboards)
+7. [MSK Cluster with CloudWatch Broker Data Log Disk Usage Alarm](./alarms)
 
 Here you will find an example for each of these configurations.
 
