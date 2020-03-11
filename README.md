@@ -80,7 +80,8 @@ and the CloudWatch Broker Data Log Disk Usage Alarm.
 | Name | Description |
 |------|-------------|
 | arn | The ARN for the MSK Cluster |
-| bootstrap\_brokers | Connection host:port pairs |
+| bootstrap\_brokers | List of hostname:port pairs of Kafka brokers suitable to bootstrap connectivity to the Kafka Cluster |
+| bootstrap\_brokers\_tls | List of hostname:port pairs of Kafka brokers suitable to bootstrap connectivity to the Kafka Cluster |
 | client\_authentication | Certificate authority arns used for client authentication |
 | cloudwatch\_dashboard\_arn | The ARN of the MSK Cloudwatch dashboard |
 | cloudwatch\_diskspace\_alarm\_arn | The ARN of the Broker Diskspace CloudWatch Alarm for the MSK Cluster |
