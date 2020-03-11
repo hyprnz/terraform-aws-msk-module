@@ -32,9 +32,16 @@ output "zookeeper_connect_string" {
   value       = "${coalescelist(aws_msk_cluster.no_client_authentication.*.zookeeper_connect_string, aws_msk_cluster.custom_configuration.*.zookeeper_connect_string, aws_msk_cluster.client_authentication.*.zookeeper_connect_string)}"
 }
 
+# Only contains value if `client_broker` encryption in transit is set to `PLAINTEXT` or `TLS_PLAINTEXT`
 output "bootstrap_brokers" {
-  description = "Connection host:port pairs"
-  value       = "${coalescelist(aws_msk_cluster.no_client_authentication.*.bootstrap_brokers, aws_msk_cluster.no_client_authentication.*.bootstrap_brokers_tls, aws_msk_cluster.custom_configuration.*.bootstrap_brokers, aws_msk_cluster.custom_configuration.*.bootstrap_brokers_tls, aws_msk_cluster.client_authentication.*.bootstrap_brokers, aws_msk_cluster.client_authentication.*.bootstrap_brokers_tls)}"
+  description = "List of hostname:port pairs of Kafka brokers suitable to bootstrap connectivity to the Kafka Cluster"
+  value       = "${coalescelist(aws_msk_cluster.no_client_authentication.*.bootstrap_brokers, aws_msk_cluster.custom_configuration.*.bootstrap_brokers, aws_msk_cluster.client_authentication.*.bootstrap_brokers)}"
+}
+
+# Only contains value if `client_broker` encryption in transit is set to 'TLS_PLAINTEXT` or `TLS`
+output "bootstrap_brokers_tls" {
+  description = "List of hostname:port pairs of Kafka brokers suitable to bootstrap connectivity to the Kafka Cluster"
+  value       = "${coalescelist(aws_msk_cluster.no_client_authentication.*.bootstrap_brokers_tls, aws_msk_cluster.custom_configuration.*.bootstrap_brokers_tls, aws_msk_cluster.client_authentication.*.bootstrap_brokers_tls)}"
 }
 
 output "encryption_at_rest_kms_key_arn" {
