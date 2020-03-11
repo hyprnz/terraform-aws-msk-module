@@ -53,7 +53,6 @@ and the CloudWatch Broker Data Log Disk Usage Alarm.
 | cluster\_name | Name of the MSK Cluster | `string` | n/a | yes |
 | create\_dashboard | Whether or not to create the MSK Dashboard | `string` | `"false"` | no |
 | create\_diskspace\_cw\_alarm | Whether or not to create a Broker Diskspace CloudWatch Alarm | `string` | `"false"` | no |
-
 | create\_msk\_cluster | Whether or not to create the MSK Cluster | `string` | `"true"` | no |
 | create\_vpc | Whether or not to create the MKS VPC | `string` | `"true"` | no |
 | custom\_configuration\_description | Description of the MSK Custom configuration | `string` | `"Custom MSK Configuration Example properties"` | no |
@@ -86,7 +85,6 @@ and the CloudWatch Broker Data Log Disk Usage Alarm.
 | cloudwatch\_dashboard\_arn | The ARN of the MSK Cloudwatch dashboard |
 | cloudwatch\_diskspace\_alarm\_arn | The ARN of the Broker Diskspace CloudWatch Alarm for the MSK Cluster |
 | cloudwatch\_diskspace\_alarm\_id | The ID of the Broker Diskspace CloudWatch Alarm for the MSK Cluster |
-
 | custom\_configuration\_arn | Custom configuration ARN |
 | custom\_configuration\_latest\_revision | The latest revision of the MSK custom configuration |
 | encryption\_at\_rest\_kms\_key\_arn | The ARN of the KMS key used for encryption at rest of the broker data volume |
