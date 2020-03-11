@@ -29,8 +29,8 @@ output "zookeeper_connect_string" {
 }
 
 output "bootstrap_brokers" {
-  description = "Plaintext connection host:port pairs"
-  value       = "${module.msk.bootstrap_brokers}"
+  description = "TLS connection host:port pairs"
+  value       = "${module.msk.bootstrap_brokers_tls}"
 }
 
 output "encryption_at_rest_kms_key_arn" {
