@@ -19,6 +19,17 @@ The CloudWatch Alarm is provided for each of the brokers in the MSK cluster to
 warn of Broker Disk Usage greater than 85% as per the [best
 practices](https://docs.aws.amazon.com/msk/latest/developerguide/bestpractices.html).
 
+A [Key Pair import utility](./utils/keypair) can also be found in this module. This enables users
+to import the public key into AWS for use when connecting to MSK Cluser Client
+Instances.
+
+## Good Practices
+When using this module it is recommended that users determine the appopriate
+size of their MSK Cluster and understand the cost using the [MSK Sizing and
+Pricing](https://amazonmsk.s3.amazonaws.com/MSK_Sizing_Pricing.xlsx) spreadsheet.
+Users should test their configurations with appropriate workloads after
+provisioning the cluster.
+
 ## Features & Examples
 
 This module supports the following MSK cluster configurations:
