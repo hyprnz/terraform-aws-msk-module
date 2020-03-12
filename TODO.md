@@ -14,4 +14,7 @@ useful additions to this Terraform module.
   * Delete unused topics (Topic Management)
 * Provide a way to control access to the Apache Zookeeper nodes
 * Add Broker Logging Configuration (Awaiting Provider Implementation)
-* Add Open Monitoring Enablement (Awaiting Provider Implementation)
+* Add Open Monitoring Enablement as Optional Feature
+* Add Cloudcraft diagrams to examples (including estimated costs)
+* Add Cost Spreadsheet information to main README.md
+* Add TerraTest tests to the examples
