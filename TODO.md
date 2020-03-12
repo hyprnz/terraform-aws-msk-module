@@ -16,5 +16,4 @@ useful additions to this Terraform module.
 * Add Broker Logging Configuration (Awaiting Provider Implementation)
 * Add Open Monitoring Enablement as Optional Feature
 * Add Cloudcraft diagrams to examples (including estimated costs)
-* Add Cost Spreadsheet information to main README.md
 * Add TerraTest tests to the examples

@@ -7,3 +7,4 @@
 * [5. Feature Flags](0005-feature-flags.md)
 * [6. CloudWatch Dashboards](0006-cloudwatch-dashboards.md)
 * [7. Broker CloudWatch Alarms](0007-broker-cloudwatch-alarms.md)
+* [8. Key Pair Utility](0008-key-pair-utility.md)
