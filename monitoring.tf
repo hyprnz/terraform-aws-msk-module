@@ -1,9 +1,9 @@
 data "aws_region" "current" {}
 
 locals {
-  create_dashboard = "${var.create_dashboard == "true" ? 1 : 0}"
-  create_diskspace_cw_alarm = "${var.create_diskspace_cw_alarm == "true" ? 1 : 0}" 
-  create_cw_alarm  = "${local.create_dashboard * local.create_diskspace_cw_alarm}"
+  create_dashboard          = "${var.create_dashboard == "true" ? 1 : 0}"
+  create_diskspace_cw_alarm = "${var.create_diskspace_cw_alarm == "true" ? 1 : 0}"
+  create_cw_alarm           = "${local.create_dashboard * local.create_diskspace_cw_alarm}"
 
   custom_dashboard = "${var.custom_dashboard_template}"
 
@@ -45,10 +45,10 @@ resource "aws_cloudwatch_metric_alarm" "msk_broker_disk_space" {
   threshold                 = "85"
   alarm_description         = "This metric monitors the MSK Broker Data Logs Disk Usage"
   insufficient_data_actions = []
- 
+
   dimensions = {
     "Cluster Name" = "${local.cluster_name}"
-    "Broker ID" = "${count.index + 1}"
+    "Broker ID"    = "${count.index + 1}"
   }
 
   tags = {

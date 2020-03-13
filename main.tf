@@ -58,7 +58,7 @@ resource "aws_msk_cluster" "no_client_authentication" {
     instance_type   = "${local.broker_node_instance_type}"
     ebs_volume_size = "${local.broker_ebs_volume_size}"
     client_subnets  = ["${split(",",local.client_subnets)}"]
-    security_groups = ["${split(",",local.security_groups)}"]
+    security_groups = ["${split(",",local.security_groups)}", "${aws_security_group.msk_cluster.id}"]
   }
 
   encryption_info {
@@ -87,7 +87,7 @@ resource "aws_msk_cluster" "custom_configuration" {
     instance_type   = "${local.broker_node_instance_type}"
     ebs_volume_size = "${local.broker_ebs_volume_size}"
     client_subnets  = ["${split(",",local.client_subnets)}"]
-    security_groups = ["${split(",",local.security_groups)}"]
+    security_groups = ["${split(",",local.security_groups)}", "${aws_security_group.msk_cluster.id}"]
   }
 
   configuration_info {
@@ -121,7 +121,7 @@ resource "aws_msk_cluster" "client_authentication" {
     instance_type   = "${local.broker_node_instance_type}"
     ebs_volume_size = "${local.broker_ebs_volume_size}"
     client_subnets  = ["${split(",",local.client_subnets)}"]
-    security_groups = ["${split(",",local.security_groups)}"]
+    security_groups = ["${split(",",local.security_groups)}", "${aws_security_group.msk_cluster.id}"]
   }
 
   client_authentication {

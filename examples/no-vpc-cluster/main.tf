@@ -13,6 +13,7 @@ module "msk" {
 
   cluster_name = "MSK-Test-Cluster"
 
+  vpc_id          = "${module.vpc.id}"
   client_subnets  = ["${module.vpc.private_subnets}"]
   security_groups = ["${module.vpc.default_security_group}"]
 }
