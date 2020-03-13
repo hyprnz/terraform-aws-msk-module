@@ -4,7 +4,6 @@ useful additions to this Terraform module.
 
 * Support Terraform 0.12
 * Pull up shared `locals` variables to a `locals.tf`
-* Add Client Instance ADR
 * Add Client Instance Example Documentation
 * Add Full Example using Internal VPC, with Dashboard, Alarms & Client Instance
 * Add SSH Output to Client Instance Module / Example

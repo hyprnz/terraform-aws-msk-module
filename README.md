@@ -41,6 +41,7 @@ This module supports the following MSK cluster configurations:
 5. MSK Cluster using Client Authentication
 6. MSK Cluster with CloudWatch Dashboard
 7. MSK Cluster with CloudWatch Broker Data Log Disk Usage Alarm
+8. MSK Cluster with Client Instance
 
 These are implemented using feature flags. For information on how to configure
 the MSK cluster in these configurations see the [examples](./examples)
