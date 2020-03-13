@@ -141,6 +141,11 @@ variable "create_vpc" {
   default     = "true"
 }
 
+variable "vpc_id" {
+  description = "The VPC ID for the MSK Cluster"
+  default     = ""
+}
+
 variable "vpc_name" {
   description = "VPC name"
   default     = "MSK-VPC"

@@ -12,6 +12,7 @@ This module supports the following MSK cluster configurations:
 5. [MSK Cluster using Client Authentication](./default-ca-cluster)
 6. [MSK Cluster with CloudWatch Dashboard](./dashboards)
 7. [MSK Cluster with CloudWatch Broker Data Log Disk Usage Alarm](./alarms)
+8. [MSK Cluster with Client Instance](./client-instance)
 
 Here you will find an example for each of these configurations.
 

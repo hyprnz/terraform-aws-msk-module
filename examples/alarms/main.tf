@@ -14,5 +14,4 @@ module "msk" {
   use_client_authentication = "false"
 
   cluster_name = "MSK-Test-Cluster"
-
 }

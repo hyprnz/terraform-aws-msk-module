@@ -22,6 +22,11 @@ output "security_group" {
   depends_on  = ["${module.vpc}"]
 }
 
+output "msk_security_group_id" {
+  description = "MSK Cluster Security Group ID"
+  value       = "${aws_security_group.msk_cluster.id}"
+}
+
 output "arn" {
   description = "The ARN for the MSK Cluster"
   value       = "${coalesce(element(concat(aws_msk_cluster.no_client_authentication.*.arn, list("")), 0), element(concat(aws_msk_cluster.custom_configuration.*.arn, list("")), 0), element(concat(aws_msk_cluster.client_authentication.*.arn, list("")), 0))}"

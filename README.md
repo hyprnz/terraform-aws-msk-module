@@ -41,6 +41,7 @@ This module supports the following MSK cluster configurations:
 5. MSK Cluster using Client Authentication
 6. MSK Cluster with CloudWatch Dashboard
 7. MSK Cluster with CloudWatch Broker Data Log Disk Usage Alarm
+8. MSK Cluster with Client Instance
 
 These are implemented using feature flags. For information on how to configure
 the MSK cluster in these configurations see the [examples](./examples)
@@ -48,24 +49,25 @@ directory. Flags can be combined, such as enabling both the CloudWatch Dashboard
 and the CloudWatch Broker Data Log Disk Usage Alarm.
 
 ## Providers                                                                                                                                                                                                
+
 | Name | Version |                                                                                                                                                                                          
 |------|---------|                                                                                                                                                                                          
 | aws | ~> 2.40 |                                                                                                                                                                                           
+| template | ~> 2.1.2 |  
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
-| broker\_ebs\_volume\_size | Size in GiB of the EBS volume for the data drive on each broker node | `number` | `2000` | no |
-| broker\_node\_instance\_type | Instance type to use for the Kafka brokers | `string` | `"kafka.m5.large"` | no |
-| certificate\_authority\_arns | List of ACM Certificate Authority Amazon Resource Names (ARNS) | `list` | `[]` | no |
-| client\_broker\_encryption | Encryption setting for data in transit between clients and brokers. Valid values: TLS, TLS PLAINTEXT and PLAINTEXT | `string` | `"TLS"` | no |
-| client\_subnets | A list of subnets to connect to in the client VPC | `list` | `[]` | no |
-| cluster\_name | Name of the MSK Cluster | `string` | n/a | yes |
+| broker\_ebs\_volume\_size | Size in GiB of the EBS volume for the data drive on each broker node | `number` | `2000` | no |                                                                               
+| broker\_node\_instance\_type | Instance type to use for the Kafka brokers | `string` | `"kafka.m5.large"` | no |                                                                                          
+| certificate\_authority\_arns | List of ACM Certificate Authority Amazon Resource Names (ARNS) | `list` | `[]` | no |                                                                                      
+| client\_broker\_encryption | Encryption setting for data in transit between clients and brokers. Valid values: TLS, TLS PLAINTEXT and PLAINTEXT | `string` | `"TLS"` | no |                               
+| client\_subnets | A list of subnets to connect to in the client VPC | `list` | `[]` | no |                                                                                                                | cluster\_name | Name of the MSK Cluster | `string` | n/a | yes |                                                                                                                                        
 | create\_dashboard | Whether or not to create the MSK Dashboard | `string` | `"false"` | no |
 | create\_diskspace\_cw\_alarm | Whether or not to create a Broker Diskspace CloudWatch Alarm | `string` | `"false"` | no |
 | create\_msk\_cluster | Whether or not to create the MSK Cluster | `string` | `"true"` | no |
-| create\_vpc | Whether or not to create the MKS VPC | `string` | `"true"` | no |
+| create\_vpc | Whether or not to create the MSK VPC | `string` | `"true"` | no |
 | custom\_configuration\_description | Description of the MSK Custom configuration | `string` | `"Custom MSK Configuration Example properties"` | no |
 | custom\_configuration\_name | Name of the MSK Custom configuration | `string` | `"Custom-MSK-Configuration-Example"` | no |
 | custom\_dashboard\_template | Location for the custom MSK Dashboard template | `string` | `""` | no |
@@ -82,6 +84,7 @@ and the CloudWatch Broker Data Log Disk Usage Alarm.
 | use\_client\_authentication | Use client authentication | `string` | `"false"` | no |
 | use\_custom\_configuration | Use a custom configuration on each Kafka Broker | `string` | `"false"` | no |
 | vpc\_cidr\_block | VPC CIDR block | `string` | `"10.0.0.0/16"` | no |
+| vpc\_id | The VPC ID for the MSK Cluster | `string` | `""` | no |
 | vpc\_name | VPC name | `string` | `"MSK-VPC"` | no |
 | vpc\_private\_subnets | Private subnets for the VPC | `list` | <pre>[<br>  "10.0.1.0/24",<br>  "10.0.2.0/24",<br>  "10.0.3.0/24"<br>]<br></pre> | no |
 | vpc\_public\_subnets | Public subnets for the VPC | `list` | <pre>[<br>  "10.0.0.0/24"<br>]<br></pre> | no |
@@ -100,6 +103,7 @@ and the CloudWatch Broker Data Log Disk Usage Alarm.
 | custom\_configuration\_arn | Custom configuration ARN |
 | custom\_configuration\_latest\_revision | The latest revision of the MSK custom configuration |
 | encryption\_at\_rest\_kms\_key\_arn | The ARN of the KMS key used for encryption at rest of the broker data volume |
+| msk\_security\_group\_id | MSK Cluster Security Group ID |
 | private\_subnets | The private subnets in the VPC created |
 | public\_subnets | The public subnets in the VPC created |
 | security\_group | The ID of the security group created for the MSK clusters |
