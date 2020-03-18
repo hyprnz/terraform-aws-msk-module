@@ -3,6 +3,7 @@ The document capatures the items that have been identified as required or
 useful additions to this Terraform module.
 
 * Support Terraform 0.12
+* Replace KeyPair with Systems Manager Session Manager
 * Pull up shared `locals` variables to a `locals.tf`
 * Add Client Instance Example Documentation
 * Add Full Example using Internal VPC, with Dashboard, Alarms & Client Instance
