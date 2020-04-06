@@ -30,7 +30,7 @@ module "msk" {
 As can be seen the `create_vpc` and `create_msk_cluster` flags are set to `true`
 and the `use_custom_configuration` and `use_client_authentication` flags are set
 to `false`. This is actually the default configurations for these values and
-could be ommitted. 
+could be omitted.
 
 The following configuration would provide the same resource outputs.
 ```

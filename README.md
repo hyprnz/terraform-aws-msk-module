@@ -20,11 +20,11 @@ warn of Broker Disk Usage greater than 85% as per the [best
 practices](https://docs.aws.amazon.com/msk/latest/developerguide/bestpractices.html).
 
 A [Key Pair import utility](./utils/keypair) can also be found in this module. This enables users
-to import the public key into AWS for use when connecting to MSK Cluser Client
+to import the public key into AWS for use when connecting to MSK Cluster Client
 Instances.
 
 ## Good Practices
-When using this module it is recommended that users determine the appopriate
+When using this module it is recommended that users determine the appropriate
 size of their MSK Cluster and understand the cost using the [MSK Sizing and
 Pricing](https://amazonmsk.s3.amazonaws.com/MSK_Sizing_Pricing.xlsx) spreadsheet.
 Users should test their configurations with appropriate workloads after
@@ -48,22 +48,22 @@ the MSK cluster in these configurations see the [examples](./examples)
 directory. Flags can be combined, such as enabling both the CloudWatch Dashboard
 and the CloudWatch Broker Data Log Disk Usage Alarm.
 
-## Providers                                                                                                                                                                                                
+## Providers
 
-| Name | Version |                                                                                                                                                                                          
-|------|---------|                                                                                                                                                                                          
-| aws | ~> 2.40 |                                                                                                                                                                                           
-| template | ~> 2.1.2 |  
+| Name | Version |
+|------|---------|
+| aws | ~> 2.40 |
+| template | ~> 2.1.2 |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
-| broker\_ebs\_volume\_size | Size in GiB of the EBS volume for the data drive on each broker node | `number` | `2000` | no |                                                                               
-| broker\_node\_instance\_type | Instance type to use for the Kafka brokers | `string` | `"kafka.m5.large"` | no |                                                                                          
-| certificate\_authority\_arns | List of ACM Certificate Authority Amazon Resource Names (ARNS) | `list` | `[]` | no |                                                                                      
-| client\_broker\_encryption | Encryption setting for data in transit between clients and brokers. Valid values: TLS, TLS PLAINTEXT and PLAINTEXT | `string` | `"TLS"` | no |                               
-| client\_subnets | A list of subnets to connect to in the client VPC | `list` | `[]` | no |                                                                                                                | cluster\_name | Name of the MSK Cluster | `string` | n/a | yes |                                                                                                                                        
+| broker\_ebs\_volume\_size | Size in GiB of the EBS volume for the data drive on each broker node | `number` | `2000` | no |
+| broker\_node\_instance\_type | Instance type to use for the Kafka brokers | `string` | `"kafka.m5.large"` | no |
+| certificate\_authority\_arns | List of ACM Certificate Authority Amazon Resource Names (ARNS) | `list` | `[]` | no |
+| client\_broker\_encryption | Encryption setting for data in transit between clients and brokers. Valid values: TLS, TLS PLAINTEXT and PLAINTEXT | `string` | `"TLS"` | no |
+| client\_subnets | A list of subnets to connect to in the client VPC | `list` | `[]` | no |                                                                                                                | cluster\_name | Name of the MSK Cluster | `string` | n/a | yes |
 | create\_dashboard | Whether or not to create the MSK Dashboard | `string` | `"false"` | no |
 | create\_diskspace\_cw\_alarm | Whether or not to create a Broker Diskspace CloudWatch Alarm | `string` | `"false"` | no |
 | create\_msk\_cluster | Whether or not to create the MSK Cluster | `string` | `"true"` | no |
@@ -123,11 +123,11 @@ installing the tools can be found <a
 href="https://github.com/npryce/adr-tools/blob/master/INSTALL.md">here</a>.
 
 Please read the [ADRs](docs/architecture/decisions/README.md) for this module to
-understand the important architectural descisions that have been made.
+understand the important architectural decisions that have been made.
 
 ## License
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 See [LICENSE](LICENSE) for full details.
 

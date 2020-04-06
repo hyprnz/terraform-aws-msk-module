@@ -1,6 +1,6 @@
 # MSK Cluster with CloudWatch Broker Data Log Disk Usage Alarm
 Here you will find an example configuration for using the MSK Cluster Terraform
-module with an optional CloudWatch Broker Data Log Disk Usage Alarm 
+module with an optional CloudWatch Broker Data Log Disk Usage Alarm
 
 The CloudWatch Alarm can only be enabled in conjunction with the CloudWatch
 Dashboard so both the `create_dashboard` and `create_diskspace_cw_alarm` flags will
@@ -41,7 +41,7 @@ module "msk" {
 As can be seen the `create_vpc` and `create_msk_cluster` flags are set to `true`
 and the `use_custom_configuration` and `use_client_authentication` flags are set
 to `false`. This is actually the default configurations for these values and
-could be ommitted. 
+could be omitted.
 
 The following configuration would provide the same resource outputs.
 ```

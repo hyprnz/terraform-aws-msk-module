@@ -1,5 +1,5 @@
 # TO-DO ITEMS
-The document capatures the items that have been identified as required or
+The document captures the items that have been identified as required or
 useful additions to this Terraform module.
 
 * Support Terraform 0.12

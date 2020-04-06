@@ -7,7 +7,7 @@ The `main.tf` contains the module configuration discussed here.
 ## The Configuration
 Users of the module need to provide the configuration for the VPC. This consists
 of the name, CIDR block and lists of public and private subnets. These values
-will be used to override the default values provided for th Internal VPC
+will be used to override the default values provided for the Internal VPC
 
 ```
 module "msk" {
@@ -37,7 +37,7 @@ module "msk" {
 As can be seen the `create_vpc` and `create_msk_cluster` flags are set to `true`
 and the `use_custom_configuration` and `use_client_authentication` flags are set
 to `false`. This is actually the default configurations for these values and
-could be ommitted. 
+could be omitted.
 
 The following configuration would provide the same resource outputs.
 ```

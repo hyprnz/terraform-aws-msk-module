@@ -5,7 +5,7 @@ module with an External VPC.
 The `main.tf` contains the module configuration discussed here.
 
 ## The Configuration
-Users of the module need to provide the VPC client subnets and security group 
+Users of the module need to provide the VPC client subnets and security group
 information default from the External VPC when using this configuration.
 
 This example uses a VPC module found in the `vpc.tf` file. The VPC should be
@@ -38,7 +38,7 @@ As can be seen the `create_vpc` is set to `false` as we are using an External
 VPC in this configuration. The `create_msk_cluster` is set to `true`
 and the `use_custom_configuration` and `use_client_authentication` flags are set
 to `false`. This is actually the default configurations for these values and
-could be ommitted. 
+could be omitted.
 
 The following configuration would provide the same resource outputs.
 ```
