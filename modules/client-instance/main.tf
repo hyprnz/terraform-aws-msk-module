@@ -157,10 +157,6 @@ resource "aws_iam_role_policy_attachment" "cwagent" {
 
 # EC2 Client Instance
 
-data "aws_availability_zones" "available" {
-  state = "available"
-}
-
 data "template_file" "session_manager" {
   template = "${file("${path.module}/templates/session_manager.tpl")}"
 }
@@ -210,7 +206,6 @@ resource "aws_cloudwatch_log_group" "instance_log_group" {
 resource "aws_instance" "client_instance" {
   ami                    = "${data.aws_ami.amazon-linux-2-ami.id}"
   instance_type          = "${var.client_instance_type}"
-  availability_zone      = "${element(data.aws_availability_zones.available.names, 0)}"
   subnet_id              = "${var.client_subnet_id}"
   iam_instance_profile   = "${aws_iam_instance_profile.ec2_msk.name}"
   vpc_security_group_ids = ["${aws_security_group.kafka_client_instance.id}", "${var.default_security_group_id}"]
