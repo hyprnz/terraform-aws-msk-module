@@ -3,10 +3,10 @@
 resource "aws_security_group" "kafka_client_instance" {
   name        = "Kafka-Client-Instance"
   description = "Grants access to MSK cluster resources"
-  vpc_id      = "${var.cluster_vpc_id}"
+  vpc_id      = var.cluster_vpc_id
 
   tags = {
-    Name = "${var.cluster_name}"
+    Name = var.cluster_name
   }
 }
 
@@ -15,8 +15,8 @@ resource "aws_security_group_rule" "zk_2181_ingress" {
   from_port                = 2181
   to_port                  = 2181
   protocol                 = "tcp"
-  source_security_group_id = "${aws_security_group.kafka_client_instance.id}"
-  security_group_id        = "${var.msk_security_group_id}"
+  source_security_group_id = aws_security_group.kafka_client_instance.id
+  security_group_id        = var.msk_security_group_id
 }
 
 resource "aws_security_group_rule" "kafka_9094_ingress" {
@@ -24,8 +24,8 @@ resource "aws_security_group_rule" "kafka_9094_ingress" {
   from_port                = 9094
   to_port                  = 9094
   protocol                 = "tcp"
-  source_security_group_id = "${aws_security_group.kafka_client_instance.id}"
-  security_group_id        = "${var.msk_security_group_id}"
+  source_security_group_id = aws_security_group.kafka_client_instance.id
+  security_group_id        = var.msk_security_group_id
 }
 
 resource "aws_security_group_rule" "kafka_9092_ingress" {
@@ -33,8 +33,8 @@ resource "aws_security_group_rule" "kafka_9092_ingress" {
   from_port                = 9092
   to_port                  = 9092
   protocol                 = "tcp"
-  source_security_group_id = "${aws_security_group.kafka_client_instance.id}"
-  security_group_id        = "${var.msk_security_group_id}"
+  source_security_group_id = aws_security_group.kafka_client_instance.id
+  security_group_id        = var.msk_security_group_id
 }
 
 ## EC2 Roles
@@ -68,16 +68,16 @@ data "aws_iam_policy_document" "instance_assume_role_policy" {
 
 resource "aws_iam_instance_profile" "ec2_msk" {
   name = "EC2-MSK-Instance-Profile"
-  role = "${aws_iam_role.full_msk_access.name}"
+  role = aws_iam_role.full_msk_access.name
 }
 
 resource "aws_iam_role" "full_msk_access" {
   name               = "Full-MSK-Access"
   path               = "/"
-  assume_role_policy = "${data.aws_iam_policy_document.instance_assume_role_policy.json}"
+  assume_role_policy = data.aws_iam_policy_document.instance_assume_role_policy.json
 
   tags = {
-    Name = "${var.cluster_name}"
+    Name = var.cluster_name
   }
 }
 
@@ -101,7 +101,7 @@ resource "aws_iam_policy" "session_manager" {
   name        = "SessionManager-EC2UserData-AllowSessions"
   description = "Grants actions to allow a EC2 instance to establish connections to Session Manager"
   path        = "/"
-  policy      = "${data.aws_iam_policy_document.session_manager.json}"
+  policy      = data.aws_iam_policy_document.session_manager.json
 }
 
 data "aws_iam_policy_document" "cwagent" {
@@ -133,7 +133,7 @@ resource "aws_iam_policy" "cwagent" {
   name        = "CloudWatch-EC2UserData-AllowLogAndMetrics"
   description = "Grants actions to allow a EC2 instance to put logs and metrics to CloudWatch"
   path        = "/"
-  policy      = "${data.aws_iam_policy_document.cwagent.json}"
+  policy      = data.aws_iam_policy_document.cwagent.json
 }
 
 data "aws_iam_policy" "full_msk_access" {
@@ -141,36 +141,36 @@ data "aws_iam_policy" "full_msk_access" {
 }
 
 resource "aws_iam_role_policy_attachment" "full_msk_access" {
-  role       = "${aws_iam_role.full_msk_access.name}"
-  policy_arn = "${data.aws_iam_policy.full_msk_access.arn}"
+  role       = aws_iam_role.full_msk_access.name
+  policy_arn = data.aws_iam_policy.full_msk_access.arn
 }
 
 resource "aws_iam_role_policy_attachment" "session_manager" {
-  role       = "${aws_iam_role.full_msk_access.name}"
-  policy_arn = "${aws_iam_policy.session_manager.arn}"
+  role       = aws_iam_role.full_msk_access.name
+  policy_arn = aws_iam_policy.session_manager.arn
 }
 
 resource "aws_iam_role_policy_attachment" "cwagent" {
-  role       = "${aws_iam_role.full_msk_access.name}"
-  policy_arn = "${aws_iam_policy.cwagent.arn}"
+  role       = aws_iam_role.full_msk_access.name
+  policy_arn = aws_iam_policy.cwagent.arn
 }
 
 # EC2 Client Instance
 
 data "template_file" "session_manager" {
-  template = "${file("${path.module}/templates/session_manager.tpl")}"
+  template = file("${path.module}/templates/session_manager.tpl")
 }
 
 data "template_file" "cwagent" {
-  template = "${file("${path.module}/templates/cwagent.tpl")}"
+  template = file("${path.module}/templates/cwagent.tpl")
 
   vars {
-    log_group_name = "${var.cwagent_log_group_name}"
+    log_group_name = var.cwagent_log_group_name
   }
 }
 
 data "template_file" "client_script" {
-  template = "${file("${path.module}/templates/client.tpl")}"
+  template = file("${path.module}/templates/client.tpl")
 
   vars {
     kafka_version      = "2.2.1"
@@ -184,33 +184,33 @@ data "template_cloudinit_config" "client_instance_config" {
 
   part {
     content_type = "text/x-shellscript"
-    content      = "${data.template_file.session_manager.rendered}"
+    content      = data.template_file.session_manager.rendered
   }
 
   part {
     content_type = "text/x-shellscript"
-    content      = "${data.template_file.cwagent.rendered}"
+    content      = data.template_file.cwagent.rendered
   }
 
   part {
     content_type = "text/x-shellscript"
-    content      = "${data.template_file.client_script.rendered}"
+    content      = data.template_file.client_script.rendered
   }
 }
 
 resource "aws_cloudwatch_log_group" "instance_log_group" {
-  name              = "${var.cwagent_log_group_name}"
-  retention_in_days = "${var.cwagent_log_group_retention_period}"
+  name              = var.cwagent_log_group_name
+  retention_in_days = var.cwagent_log_group_retention_period
 }
 
 resource "aws_instance" "client_instance" {
-  ami                    = "${data.aws_ami.amazon-linux-2-ami.id}"
-  instance_type          = "${var.client_instance_type}"
-  subnet_id              = "${var.client_subnet_id}"
-  iam_instance_profile   = "${aws_iam_instance_profile.ec2_msk.name}"
-  vpc_security_group_ids = ["${aws_security_group.kafka_client_instance.id}", "${var.default_security_group_id}"]
+  ami                    = data.aws_ami.amazon-linux-2-ami.id
+  instance_type          = var.client_instance_type
+  subnet_id              = var.client_subnet_id
+  iam_instance_profile   = aws_iam_instance_profile.ec2_msk.name
+  vpc_security_group_ids = [aws_security_group.kafka_client_instance.id, var.default_security_group_id]
 
-  user_data = "${data.template_cloudinit_config.client_instance_config.rendered}"
+  user_data = data.template_cloudinit_config.client_instance_config.rendered
 
   tags = {
     Name    = "MSK-Client-Instance"

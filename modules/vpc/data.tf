@@ -3,7 +3,7 @@ data "aws_availability_zones" "available" {
 }
 
 data "aws_security_group" "default" {
-  count  = "${local.create_vpc ? 1 : 0}"
+  count  = local.create_vpc ? 1 : 0
   name   = "default"
-  vpc_id = "${aws_vpc.this.id}"
+  vpc_id = aws_vpc.this[0].id
 }

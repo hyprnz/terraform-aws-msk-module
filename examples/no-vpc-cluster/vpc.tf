@@ -1,8 +1,8 @@
 module "vpc" {
   source = "../../modules/vpc"
 
-  providers {
-    aws = "aws"
+  providers = {
+    aws = aws
   }
 
   create_vpc = "true"

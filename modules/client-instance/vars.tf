@@ -9,29 +9,29 @@ variable "cluster_vpc_id" {
 }
 
 variable "client_instance_type" {
-  type        = "string"
   description = "The EC2 Client Instance Type"
+  type        = string
   default     = "m5.large"
 }
 
 variable "client_subnet_id" {
-  type        = "string"
   description = "The Public Subnet to launch the Client Instance in"
+  type        = string
 }
 
 variable "msk_security_group_id" {
-  type        = "string"
   description = "The MSK Cluster Security group to add Security Rules to"
+  type        = string
 }
 
 variable "default_security_group_id" {
-  type        = "string"
   description = "The default MSK Cluster Security group"
+  type        = string
 }
 
 variable "cwagent_log_group_name" {
-  type        = "string"
   description = "The name of the CloudWatch log group where the instance logs are sent."
+  type        = string
 }
 
 variable "cwagent_log_group_retention_period" {
