@@ -8,17 +8,6 @@ variable "cluster_vpc_id" {
   description = "ID of the MSK Cluster VPC to associate the Client Instance with"
 }
 
-variable "ssh_location" {
-  type        = "list"
-  description = "SSH Location IP Address that enables access to the Client Instance"
-}
-
-variable "keypair_name" {
-  type        = "string"
-  description = "The name of the AWS Key Pair to use for SSH Access to Client Instance"
-  default     = "MSK-Client"
-}
-
 variable "client_instance_type" {
   type        = "string"
   description = "The EC2 Client Instance Type"
@@ -38,4 +27,14 @@ variable "msk_security_group_id" {
 variable "default_security_group_id" {
   type        = "string"
   description = "The default MSK Cluster Security group"
+}
+
+variable "cwagent_log_group_name" {
+  type        = "string"
+  description = "The name of the CloudWatch log group where the instance logs are sent."
+}
+
+variable "cwagent_log_group_retention_period" {
+  description = "The CloudWatch Log Group rentention period in days. Defaults to `30` days"
+  default     = 30
 }

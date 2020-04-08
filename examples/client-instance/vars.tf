@@ -3,6 +3,3 @@ variable "my_region" {
   default     = "ap-southeast-2"
 }
 
-variable "ssh_location" {
-  description = "CIDR Block for the IP Addresses able to access the Client Instance"
-}

@@ -4,7 +4,7 @@ Date: 2020-03-12
 
 ## Status
 
-Accepted
+Superceded by [10. Use Session Manager for shell access to instances](0010-use-session-manager-for-shell-access-to-instances.md)
 
 ## Context
 
