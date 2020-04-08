@@ -2,21 +2,12 @@
 
 resource "aws_security_group" "kafka_client_instance" {
   name        = "Kafka-Client-Instance"
-  description = "Enable SSH access via port 22"
+  description = "Grants access to MSK cluster resources"
   vpc_id      = "${var.cluster_vpc_id}"
 
   tags = {
     Name = "${var.cluster_name}"
   }
-}
-
-resource "aws_security_group_rule" "enable_ssh_port_22" {
-  type              = "ingress"
-  from_port         = 22
-  to_port           = 22
-  protocol          = "tcp"
-  cidr_blocks       = "${var.ssh_location}"
-  security_group_id = "${aws_security_group.kafka_client_instance.id}"
 }
 
 resource "aws_security_group_rule" "zk_2181_ingress" {
@@ -75,10 +66,6 @@ data "aws_iam_policy_document" "instance_assume_role_policy" {
   }
 }
 
-data "aws_iam_policy" "full_msk_access" {
-  arn = "arn:aws:iam::aws:policy/AmazonMSKFullAccess"
-}
-
 resource "aws_iam_instance_profile" "ec2_msk" {
   name = "EC2-MSK-Instance-Profile"
   role = "${aws_iam_role.full_msk_access.name}"
@@ -94,15 +81,96 @@ resource "aws_iam_role" "full_msk_access" {
   }
 }
 
+data "aws_iam_policy_document" "session_manager" {
+  statement {
+    sid = "SessionManagerClientAccess"
+
+    actions = [
+      "ssmmessages:CreateControlChannel",
+      "ssmmessages:CreateDataChannel",
+      "ssmmessages:OpenControlChannel",
+      "ssmmessages:OpenDataChannel",
+      "ssm:UpdateInstanceInformation"
+    ]
+
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_policy" "session_manager" {
+  name        = "SessionManager-EC2UserData-AllowSessions"
+  description = "Grants actions to allow a EC2 instance to establish connections to Session Manager"
+  path        = "/"
+  policy      = "${data.aws_iam_policy_document.session_manager.json}"
+}
+
+data "aws_iam_policy_document" "cwagent" {
+  statement {
+    sid = "CWAgentLogAccess"
+
+    actions = [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+      "logs:DescribeLogStreams"
+    ]
+
+    resources = ["arn:aws:logs:*:*:*"]
+  }
+
+  statement {
+    sid = "CWAgentMetrciAccess"
+
+    actions = [
+      "cloudwatch:PutMetricData"
+    ]
+
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_policy" "cwagent" {
+  name        = "CloudWatch-EC2UserData-AllowLogAndMetrics"
+  description = "Grants actions to allow a EC2 instance to put logs and metrics to CloudWatch"
+  path        = "/"
+  policy      = "${data.aws_iam_policy_document.cwagent.json}"
+}
+
+data "aws_iam_policy" "full_msk_access" {
+  arn = "arn:aws:iam::aws:policy/AmazonMSKFullAccess"
+}
+
 resource "aws_iam_role_policy_attachment" "full_msk_access" {
   role       = "${aws_iam_role.full_msk_access.name}"
   policy_arn = "${data.aws_iam_policy.full_msk_access.arn}"
+}
+
+resource "aws_iam_role_policy_attachment" "session_manager" {
+  role       = "${aws_iam_role.full_msk_access.name}"
+  policy_arn = "${aws_iam_policy.session_manager.arn}"
+}
+
+resource "aws_iam_role_policy_attachment" "cwagent" {
+  role       = "${aws_iam_role.full_msk_access.name}"
+  policy_arn = "${aws_iam_policy.cwagent.arn}"
 }
 
 # EC2 Client Instance
 
 data "aws_availability_zones" "available" {
   state = "available"
+}
+
+data "template_file" "session_manager" {
+  template = "${file("${path.module}/templates/session_manager.tpl")}"
+}
+
+data "template_file" "cwagent" {
+  template = "${file("${path.module}/templates/cwagent.tpl")}"
+
+  vars {
+    log_group_name = "${var.cwagent_log_group_name}"
+  }
 }
 
 data "template_file" "client_script" {
@@ -120,8 +188,23 @@ data "template_cloudinit_config" "client_instance_config" {
 
   part {
     content_type = "text/x-shellscript"
+    content      = "${data.template_file.session_manager.rendered}"
+  }
+
+  part {
+    content_type = "text/x-shellscript"
+    content      = "${data.template_file.cwagent.rendered}"
+  }
+
+  part {
+    content_type = "text/x-shellscript"
     content      = "${data.template_file.client_script.rendered}"
   }
+}
+
+resource "aws_cloudwatch_log_group" "instance_log_group" {
+  name              = "${var.cwagent_log_group_name}"
+  retention_in_days = "${var.cwagent_log_group_retention_period}"
 }
 
 resource "aws_instance" "client_instance" {
@@ -130,10 +213,8 @@ resource "aws_instance" "client_instance" {
   availability_zone      = "${element(data.aws_availability_zones.available.names, 0)}"
   subnet_id              = "${var.client_subnet_id}"
   iam_instance_profile   = "${aws_iam_instance_profile.ec2_msk.name}"
-  key_name               = "${var.keypair_name}"
   vpc_security_group_ids = ["${aws_security_group.kafka_client_instance.id}", "${var.default_security_group_id}"]
 
-  #user_data_base64 = "${data.template_cloudinit_config.client_instance_config.rendered}"
   user_data = "${data.template_cloudinit_config.client_instance_config.rendered}"
 
   tags = {
