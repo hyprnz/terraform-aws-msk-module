@@ -56,7 +56,7 @@ variable "security_groups" {
 }
 
 variable "client_broker_encryption" {
-  description = "Encryption setting for data in transit between clients and brokers. Valid values: TLS, TLS PLAINTEXT and PLAINTEXT"
+  description = "Encryption setting for data in transit between clients and brokers. Valid values: TLS, TLS_PLAINTEXT and PLAINTEXT"
   type        = string
   default     = "TLS"
 }
