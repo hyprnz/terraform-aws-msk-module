@@ -1,10 +1,10 @@
 variable "cluster_name" {
-  type        = "string"
+  type        = string
   description = "Name of the MSK Cluster to associate the Client Instance with"
 }
 
 variable "cluster_vpc_id" {
-  type        = "string"
+  type        = string
   description = "ID of the MSK Cluster VPC to associate the Client Instance with"
 }
 

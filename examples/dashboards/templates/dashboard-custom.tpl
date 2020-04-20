@@ -7,7 +7,7 @@
             "width": 6,
             "height": 6,
             "properties": {
-                "markdown": "![Kafka Logo](https://raw.githubusercontent.com/hyprnz/terraform-aws-msk-module/0.11-initial-example/assets/Kafka-Logo-200.jpg)"
+                "markdown": "![Kafka Logo](https://raw.githubusercontent.com/hyprnz/terraform-aws-msk-module/master/assets/Kafka-Logo-200.jpg)"
             }
         },
         {

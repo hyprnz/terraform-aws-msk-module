@@ -164,7 +164,7 @@ data "template_file" "session_manager" {
 data "template_file" "cwagent" {
   template = file("${path.module}/templates/cwagent.tpl")
 
-  vars {
+  vars = {
     log_group_name = var.cwagent_log_group_name
   }
 }
@@ -172,7 +172,7 @@ data "template_file" "cwagent" {
 data "template_file" "client_script" {
   template = file("${path.module}/templates/client.tpl")
 
-  vars {
+  vars = {
     kafka_version      = "2.2.1"
     kafka_package_name = "kafka_2.12-2.2.1"
   }
