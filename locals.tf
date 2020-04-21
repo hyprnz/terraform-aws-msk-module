@@ -2,12 +2,13 @@ locals {
   create_msk_cluster        = var.create_msk_cluster
   use_custom_configuration  = var.use_custom_configuration
   use_client_authentication = var.use_client_authentication
-  internal_vpc              = var.create_vpc
+  internal_vpc              = var.create_vpc && local.create_msk_cluster
 
-  create_custom_configuration = local.use_custom_configuration && local.create_msk_cluster
+  create_custom_configuration  = local.use_custom_configuration && local.create_msk_cluster
+  create_client_authentication = local.use_client_authentication && local.create_msk_cluster
 
-  count_custom_configuration     = (local.create_custom_configuration ? 1 : 0) * (local.use_client_authentication ? 0 : 1)
-  count_client_authentication    = (local.create_msk_cluster ? 1 : 0) * (local.use_custom_configuration ? 0 : 1) * (local.use_client_authentication ? 1 : 0)
+  count_custom_configuration     = local.create_custom_configuration ? 1 : 0
+  count_client_authentication    = local.create_client_authentication ? 1 : 0
   count_msk_configuration        = (length(var.msk_configuration_arn) > 0 ? 0 : 1) * (local.create_custom_configuration ? 1 : 0)
 
   cluster_name        = var.cluster_name
@@ -20,7 +21,7 @@ locals {
   client_subnets  = local.internal_vpc ? module.vpc.private_subnets : var.client_subnets
   security_groups = local.internal_vpc ? module.vpc.default_security_group : var.security_groups
 
-  msk_configuration_arn      = length(var.msk_configuration_arn) > 0 ? var.msk_configuration_arn : element(concat(aws_msk_configuration.this.*.arn, list("")), 0)
+  msk_configuration_arn      = length(var.msk_configuration_arn) > 0 ? var.msk_configuration_arn : element(concat(aws_msk_configuration.this[*].arn, list("")), 0)
   msk_configuration_revision = local.use_custom_configuration ? var.msk_configuration_revision : 1
 
   client_broker_encryption = var.client_broker_encryption

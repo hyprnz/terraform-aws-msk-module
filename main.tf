@@ -5,7 +5,7 @@ module "vpc" {
     aws = aws
   }
 
-  create_vpc = var.create_vpc
+  create_vpc = local.internal_vpc
 
   vpc_name        = var.vpc_name
   cidr_block      = var.vpc_cidr_block
@@ -70,6 +70,6 @@ resource "aws_msk_configuration" "this" {
   description = var.custom_configuration_description
 
   server_properties = <<PROPERTIES
-var.server_properties
+  ${var.server_properties}
 PROPERTIES
 }
