@@ -31,5 +31,5 @@ module "client_instance" {
   msk_security_group_id     = module.msk.msk_security_group_id
   default_security_group_id = element(module.msk.security_group, 0)
 
-  cwagent_log_group_name = "/aws/msk-test-cluster/"
+  cwagent_log_group_name = "/aws/ec2/${local.cluster_name}/"
 }

@@ -79,7 +79,7 @@ variable "certificate_authority_arns" {
 }
 
 variable "enhanced_monitoring_level" {
-  description = "Desired enhanced MSK CloudWatch monitoring level"
+  description = "Desired enhanced MSK CloudWatch monitoring level. Valid values are DEFAULT, PER_BROKER, or PER_TOPIC_PER_BROKER"
   type        = string
   default     = "DEFAULT"
 }
