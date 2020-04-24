@@ -28,7 +28,7 @@ resource "aws_msk_cluster" "this" {
   }
 
   encryption_info {
-    encryption_in_transit  {
+    encryption_in_transit {
       client_broker = local.client_broker_encryption
       in_cluster    = local.in_cluster_encryption
     }
@@ -36,7 +36,7 @@ resource "aws_msk_cluster" "this" {
     encryption_at_rest_kms_key_arn = local.encryption_kms_key_arn
   }
 
-  enhanced_monitoring =  local.enhanced_monitoring_level
+  enhanced_monitoring = local.enhanced_monitoring_level
 
 
   dynamic "configuration_info" {

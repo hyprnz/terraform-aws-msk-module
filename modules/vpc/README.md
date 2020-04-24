@@ -19,9 +19,9 @@ values to prevent collisions with existing VPCs.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
 | cidr\_block | VPC CIDR block | `string` | `"10.0.0.0/16"` | no |
-| create\_vpc | Whether or not to create the VPC | `string` | `"true"` | no |
-| private\_subnets | Private subnets for the VPC | `list` | <pre>[<br>  "10.0.1.0/24",<br>  "10.0.2.0/24",<br>  "10.0.3.0/24"<br>]<br></pre> | no |
-| public\_subnets | Public subnets for the VPC | `list` | <pre>[<br>  "10.0.0.0/24"<br>]<br></pre> | no |
+| create\_vpc | Whether or not to create the VPC | `bool` | `true` | no |
+| private\_subnets | Private subnets for the VPC | `list(string)` | <pre>[<br>  "10.0.1.0/24",<br>  "10.0.2.0/24",<br>  "10.0.3.0/24"<br>]<br></pre> | no |
+| public\_subnets | Public subnets for the VPC | `list(string)` | <pre>[<br>  "10.0.0.0/24"<br>]<br></pre> | no |
 | vpc\_name | VPC name | `string` | `"MSK-VPC"` | no |
 
 ## Outputs
@@ -32,4 +32,3 @@ values to prevent collisions with existing VPCs.
 | id | The ID of the VPC created |
 | private\_subnets | The private subnets in the VPC created |
 | public\_subnets | The public subnets in the VPC created |
-

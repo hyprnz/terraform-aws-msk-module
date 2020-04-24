@@ -19,10 +19,6 @@ The CloudWatch Alarm is provided for each of the brokers in the MSK cluster to
 warn of Broker Disk Usage greater than 85% as per the [best
 practices](https://docs.aws.amazon.com/msk/latest/developerguide/bestpractices.html).
 
-A [Key Pair import utility](./utils/keypair) can also be found in this module. This enables users
-to import the public key into AWS for use when connecting to MSK Cluster Client
-Instances.
-
 ## Good Practices
 When using this module it is recommended that users determine the appropriate
 size of their MSK Cluster and understand the cost using the [MSK Sizing and
@@ -59,35 +55,35 @@ and the CloudWatch Broker Data Log Disk Usage Alarm.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
+| cluster\_name | Name of the MSK Cluster | `string` | n/a | yes |
 | broker\_ebs\_volume\_size | Size in GiB of the EBS volume for the data drive on each broker node | `number` | `2000` | no |
 | broker\_node\_instance\_type | Instance type to use for the Kafka brokers | `string` | `"kafka.m5.large"` | no |
-| certificate\_authority\_arns | List of ACM Certificate Authority Amazon Resource Names (ARNS) | `list` | `[]` | no |
-| client\_broker\_encryption | Encryption setting for data in transit between clients and brokers. Valid values: TLS, TLS PLAINTEXT and PLAINTEXT | `string` | `"TLS"` | no |
-| client\_subnets | A list of subnets to connect to in the client VPC | `list` | `[]` | no |                                                                                                                | cluster\_name | Name of the MSK Cluster | `string` | n/a | yes |
-| create\_dashboard | Whether or not to create the MSK Dashboard | `string` | `"false"` | no |
-| create\_diskspace\_cw\_alarm | Whether or not to create a Broker Diskspace CloudWatch Alarm | `string` | `"false"` | no |
-| create\_msk\_cluster | Whether or not to create the MSK Cluster | `string` | `"true"` | no |
-| create\_vpc | Whether or not to create the MSK VPC | `string` | `"true"` | no |
+| certificate\_authority\_arns | List of ACM Certificate Authority Amazon Resource Names (ARNS) | `list(string)` | `[]` | no |
+| client\_broker\_encryption | Encryption setting for data in transit between clients and brokers. Valid values: TLS, TLS\_PLAINTEXT and PLAINTEXT | `string` | `"TLS"` | no |
+| client\_subnets | A list of subnets to connect to in the client VPC | `list(string)` | `[]` | no |
+| create\_dashboard | Whether or not to create the MSK Dashboard | `bool` | `false` | no |
+| create\_diskspace\_cw\_alarm | Whether or not to create a Broker Diskspace CloudWatch Alarm | `bool` | `false` | no |
+| create\_msk\_cluster | Whether or not to create the MSK Cluster | `bool` | `true` | no |
+| create\_vpc | Whether or not to create the MSK VPC | `bool` | `true` | no |
 | custom\_configuration\_description | Description of the MSK Custom configuration | `string` | `"Custom MSK Configuration Example properties"` | no |
 | custom\_configuration\_name | Name of the MSK Custom configuration | `string` | `"Custom-MSK-Configuration-Example"` | no |
 | custom\_dashboard\_template | Location for the custom MSK Dashboard template | `string` | `""` | no |
-| encryption\_kms\_key\_arn | KMS key short ID or ARN to use for encrypting your data at rest. If no key is specified an AWS managed KMS key will be used for encrypting the data at rest | `string` | `""`
-| no |
-| enhanced\_monitoring\_level | Desired enhanced MSK CloudWatch monitoring level | `string` | `"DEFAULT"` | no |
+| encryption\_kms\_key\_arn | KMS key short ID or ARN to use for encrypting your data at rest. If no key is specified an AWS managed KMS key will be used for encrypting the data at rest | `string` | `""` | no |
+| enhanced\_monitoring\_level | Desired enhanced MSK CloudWatch monitoring level. Valid values are DEFAULT, PER\_BROKER, or PER\_TOPIC\_PER\_BROKER | `string` | `"DEFAULT"` | no |
 | in\_cluster\_encryption | Whether data communication among broker nodes is encrypted | `bool` | `true` | no |
 | kafka\_version | Desired Kafka software version | `string` | `"2.2.1"` | no |
 | msk\_configuration\_arn | ARN of the MSK Configuration to use in the cluster | `string` | `""` | no |
 | msk\_configuration\_revision | Revision of the MSK Configuration to use in the cluster | `number` | `1` | no |
 | num\_of\_broker\_nodes | Desired total number of broker nodes in the kafka cluster. It must be a multiple of the number of specified client subnets | `number` | `3` | no |
-| security\_groups | A list of the security groups to associate with the elastic network interfaces to control who can communicate with the cluster | `list` | `[]` | no |
-| server\_properties | Contents of the server.properties file for Kafka broker | `string` | <pre><br>auto.create.topics.enable = false<br>default.replication.factor = 3<br>delete.topic.enable = true<br>min.insync.replicas = 2<br>num.io.threads = 8<br>num.network.threads = 5<br>num.partitions = 1<br>num.replica.fetchers = 2<br>socket.request.max.bytes = 104857600<br>unclean.leader.election.enable = true<br></pre> | no |
-| use\_client\_authentication | Use client authentication | `string` | `"false"` | no |
-| use\_custom\_configuration | Use a custom configuration on each Kafka Broker | `string` | `"false"` | no |
+| security\_groups | A list of the security groups to associate with the elastic network interfaces to control who can communicate with the cluster | `list(string)` | `[]` | no |
+| server\_properties | Contents of the server.properties file for Kafka broker | `string` | `"auto.create.topics.enable = false\ndefault.replication.factor = 3\ndelete.topic.enable = true\nmin.insync.replicas = 2\nnum.io.threads = 8\nnum.network.threads = 5\nnum.partitions = 1\nnum.replica.fetchers = 2\nsocket.request.max.bytes = 104857600\nunclean.leader.election.enable = true\n"` | no |
+| use\_client\_authentication | Use client authentication | `bool` | `false` | no |
+| use\_custom\_configuration | Use a custom configuration on each Kafka Broker | `bool` | `false` | no |
 | vpc\_cidr\_block | VPC CIDR block | `string` | `"10.0.0.0/16"` | no |
 | vpc\_id | The VPC ID for the MSK Cluster | `string` | `""` | no |
 | vpc\_name | VPC name | `string` | `"MSK-VPC"` | no |
-| vpc\_private\_subnets | Private subnets for the VPC | `list` | <pre>[<br>  "10.0.1.0/24",<br>  "10.0.2.0/24",<br>  "10.0.3.0/24"<br>]<br></pre> | no |
-| vpc\_public\_subnets | Public subnets for the VPC | `list` | <pre>[<br>  "10.0.0.0/24"<br>]<br></pre> | no |
+| vpc\_private\_subnets | Private subnets for the VPC | `list(string)` | <pre>[<br>  "10.0.1.0/24",<br>  "10.0.2.0/24",<br>  "10.0.3.0/24"<br>]<br></pre> | no |
+| vpc\_public\_subnets | Public subnets for the VPC | `list(string)` | <pre>[<br>  "10.0.0.0/24"<br>]<br></pre> | no |
 
 ## Outputs
 
@@ -148,3 +144,5 @@ limitations under the License.
 ```
 
 Copyright &copy; 2020 [Hypr NZ](https://www.hypr.nz/)
+
+

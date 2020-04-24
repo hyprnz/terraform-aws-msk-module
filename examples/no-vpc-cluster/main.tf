@@ -32,7 +32,7 @@ module "msk" {
 
   cluster_name = "MSK-Test-Cluster"
 
-  vpc_id          =  module.example_no_vpc.id
-  client_subnets  =  module.example_no_vpc.private_subnets
-  security_groups =  module.example_no_vpc.default_security_group
+  vpc_id          = module.example_no_vpc.id
+  client_subnets  = module.example_no_vpc.private_subnets
+  security_groups = module.example_no_vpc.default_security_group
 }

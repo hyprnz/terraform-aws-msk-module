@@ -7,9 +7,9 @@ locals {
   create_custom_configuration  = local.use_custom_configuration && local.create_msk_cluster
   create_client_authentication = local.use_client_authentication && local.create_msk_cluster
 
-  count_custom_configuration     = local.create_custom_configuration ? 1 : 0
-  count_client_authentication    = local.create_client_authentication ? 1 : 0
-  count_msk_configuration        = (length(var.msk_configuration_arn) > 0 ? 0 : 1) * (local.create_custom_configuration ? 1 : 0)
+  count_custom_configuration  = local.create_custom_configuration ? 1 : 0
+  count_client_authentication = local.create_client_authentication ? 1 : 0
+  count_msk_configuration     = (length(var.msk_configuration_arn) > 0 ? 0 : 1) * (local.create_custom_configuration ? 1 : 0)
 
   cluster_name        = var.cluster_name
   kafka_version       = var.kafka_version

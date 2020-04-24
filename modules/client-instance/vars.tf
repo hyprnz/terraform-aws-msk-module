@@ -35,6 +35,6 @@ variable "cwagent_log_group_name" {
 }
 
 variable "cwagent_log_group_retention_period" {
-  description = "The CloudWatch Log Group rentention period in days. Defaults to `30` days"
+  description = "The CloudWatch Log Group retention period in days. Defaults to `30` days"
   default     = 30
 }

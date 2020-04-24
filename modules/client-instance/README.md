@@ -8,10 +8,6 @@ This module can be used as a starting point for how to establish secure
 connection to the MSK Cluster based on adding rules to the MSK Cluster Security
 Group.
 
-**NOTE** - Prior to using this module you will need to have provisioned an AWS
-keypair in the AWS Account being used. The keypair utility provided with this
-module can help with this.
-
 ## Providers
 
 | Name | Version |
@@ -23,17 +19,18 @@ module can help with this.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
-| client\_instance\_type | The EC2 Client Instance Type | `string` | `"m5.large"` | no |
 | client\_subnet\_id | The Public Subnet to launch the Client Instance in | `string` | n/a | yes |
 | cluster\_name | Name of the MSK Cluster to associate the Client Instance with | `string` | n/a | yes |
 | cluster\_vpc\_id | ID of the MSK Cluster VPC to associate the Client Instance with | `string` | n/a | yes |
+| cwagent\_log\_group\_name | The name of the CloudWatch log group where the instance logs are sent. | `string` | n/a | yes |
 | default\_security\_group\_id | The default MSK Cluster Security group | `string` | n/a | yes |
-| keypair\_name | The name of the AWS Key Pair to use for SSH Access to Client Instance | `string` | `"MSK-Client"` | no |
 | msk\_security\_group\_id | The MSK Cluster Security group to add Security Rules to | `string` | n/a | yes |
-| ssh\_location | SSH Location IP Address that enables access to the Client Instance | `list` | n/a | yes |
+| client\_instance\_type | The EC2 Client Instance Type | `string` | `"m5.large"` | no |
+| cwagent\_log\_group\_retention\_period | The CloudWatch Log Group retention period in days. Defaults to `30` days | `number` | `30` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
 | kafka\_security\_group\_id | Kafka Client Instance Security Group ID |
+

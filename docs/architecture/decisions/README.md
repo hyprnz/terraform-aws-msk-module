@@ -8,3 +8,5 @@
 * [6. CloudWatch Dashboards](0006-cloudwatch-dashboards.md)
 * [7. Broker CloudWatch Alarms](0007-broker-cloudwatch-alarms.md)
 * [8. Key Pair Utility](0008-key-pair-utility.md)
+* [9. MSK Client Instance](0009-msk-client-instance.md)
+* [10. Use Session Manager for shell access to instances](0010-use-session-manager-for-shell-access-to-instances.md)
