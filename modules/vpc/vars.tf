@@ -26,3 +26,17 @@ variable "private_subnets" {
   type        = list(string)
   default     = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
 }
+
+#tags
+
+variable "module_tags" {
+  description = "Additional tags to apply to all module resources"
+  type        = map(any)
+  default     = {}
+}
+
+variable "vpc_tags" {
+  description = "Additional tags to apply to any provisioned vpc resources"
+  type        = map(any)
+  default     = {}
+}

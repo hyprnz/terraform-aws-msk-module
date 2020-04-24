@@ -3,7 +3,6 @@ resource "aws_security_group" "msk_cluster" {
   description = "MSK Security Group"
   vpc_id      = local.vpc_id
 
-  tags = {
-    Name = local.cluster_name
-  }
+  tags = merge(map("Name", local.cluster_name), var.msk_cluster_tags, var.tags)
+
 }

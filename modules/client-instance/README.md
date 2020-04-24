@@ -27,6 +27,7 @@ Group.
 | msk\_security\_group\_id | The MSK Cluster Security group to add Security Rules to | `string` | n/a | yes |
 | client\_instance\_type | The EC2 Client Instance Type | `string` | `"m5.large"` | no |
 | cwagent\_log\_group\_retention\_period | The CloudWatch Log Group retention period in days. Defaults to `30` days | `number` | `30` | no |
+| tags | Additional tags to apply to all provisioned resources | `map(any)` | `{}` | no |
 
 ## Outputs
 

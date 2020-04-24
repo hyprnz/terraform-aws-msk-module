@@ -18,9 +18,7 @@ resource "aws_vpc" "this" {
   enable_dns_support   = true
   enable_dns_hostnames = true
 
-  tags = {
-    Name = local.vpc_name
-  }
+  tags = merge(map("Name", local.vpc_name), var.vpc_tags, var.module_tags)
 }
 
 resource "aws_subnet" "public" {
@@ -32,9 +30,7 @@ resource "aws_subnet" "public" {
 
   map_public_ip_on_launch = true
 
-  tags = {
-    Name = "${format("%s-Public-%s", local.vpc_name, element(local.availability_zones, count.index))}"
-  }
+  tags = merge(map("Name", format("%s-Public-%s", local.vpc_name, element(local.availability_zones, count.index))), var.vpc_tags, var.module_tags)
 }
 
 resource "aws_subnet" "private" {
@@ -44,9 +40,7 @@ resource "aws_subnet" "private" {
   cidr_block        = element(concat(local.private_subnets, list("")), count.index)
   availability_zone = element(local.availability_zones, count.index)
 
-  tags = {
-    Name = format("%s-Private-%s", local.vpc_name, element(local.availability_zones, count.index))
-  }
+  tags = merge(map("Name", format("%s-Private-%s", local.vpc_name, element(local.availability_zones, count.index))), var.vpc_tags, var.module_tags)
 }
 
 resource "aws_route_table" "public" {
@@ -54,9 +48,7 @@ resource "aws_route_table" "public" {
 
   vpc_id = aws_vpc.this[0].id
 
-  tags = {
-    Name = format("%s-Public-%s", local.vpc_name, element(local.availability_zones, count.index))
-  }
+  tags = merge(map("Name", format("%s-Public-%s", local.vpc_name, element(local.availability_zones, count.index))), var.vpc_tags, var.module_tags)
 }
 
 resource "aws_route" "public_internet_gateway" {
@@ -85,9 +77,7 @@ resource "aws_route_table" "private" {
 
   vpc_id = aws_vpc.this[0].id
 
-  tags = {
-    Name = format("%s-Private-%s", local.vpc_name, element(local.availability_zones, count.index))
-  }
+  tags = merge(map("Name", format("%s-Private-%s", local.vpc_name, element(local.availability_zones, count.index))), var.vpc_tags, var.module_tags)
 }
 
 resource "aws_route_table_association" "private" {
@@ -102,7 +92,5 @@ resource "aws_internet_gateway" "this" {
 
   vpc_id = aws_vpc.this[0].id
 
-  tags = {
-    Name = format("%s", local.vpc_name)
-  }
+  tags = merge(map("Name", format("%s", local.vpc_name)), var.vpc_tags, var.module_tags)
 }

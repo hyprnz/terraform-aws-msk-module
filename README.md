@@ -72,11 +72,14 @@ and the CloudWatch Broker Data Log Disk Usage Alarm.
 | enhanced\_monitoring\_level | Desired enhanced MSK CloudWatch monitoring level. Valid values are DEFAULT, PER\_BROKER, or PER\_TOPIC\_PER\_BROKER | `string` | `"DEFAULT"` | no |
 | in\_cluster\_encryption | Whether data communication among broker nodes is encrypted | `bool` | `true` | no |
 | kafka\_version | Desired Kafka software version | `string` | `"2.2.1"` | no |
+| monitoring\_tags | Additional tags to apply to any provisioned monitoring/metric resources | `map(any)` | `{}` | no |
+| msk\_cluster\_tags | Additional tags to apply to msk\_cluster resources | `map(any)` | `{}` | no |
 | msk\_configuration\_arn | ARN of the MSK Configuration to use in the cluster | `string` | `""` | no |
 | msk\_configuration\_revision | Revision of the MSK Configuration to use in the cluster | `number` | `1` | no |
 | num\_of\_broker\_nodes | Desired total number of broker nodes in the kafka cluster. It must be a multiple of the number of specified client subnets | `number` | `3` | no |
 | security\_groups | A list of the security groups to associate with the elastic network interfaces to control who can communicate with the cluster | `list(string)` | `[]` | no |
 | server\_properties | Contents of the server.properties file for Kafka broker | `string` | `"auto.create.topics.enable = false\ndefault.replication.factor = 3\ndelete.topic.enable = true\nmin.insync.replicas = 2\nnum.io.threads = 8\nnum.network.threads = 5\nnum.partitions = 1\nnum.replica.fetchers = 2\nsocket.request.max.bytes = 104857600\nunclean.leader.election.enable = true\n"` | no |
+| tags | Additional tags to apply to all module resources | `map(any)` | `{}` | no |
 | use\_client\_authentication | Use client authentication | `bool` | `false` | no |
 | use\_custom\_configuration | Use a custom configuration on each Kafka Broker | `bool` | `false` | no |
 | vpc\_cidr\_block | VPC CIDR block | `string` | `"10.0.0.0/16"` | no |
@@ -84,6 +87,7 @@ and the CloudWatch Broker Data Log Disk Usage Alarm.
 | vpc\_name | VPC name | `string` | `"MSK-VPC"` | no |
 | vpc\_private\_subnets | Private subnets for the VPC | `list(string)` | <pre>[<br>  "10.0.1.0/24",<br>  "10.0.2.0/24",<br>  "10.0.3.0/24"<br>]<br></pre> | no |
 | vpc\_public\_subnets | Public subnets for the VPC | `list(string)` | <pre>[<br>  "10.0.0.0/24"<br>]<br></pre> | no |
+| vpc\_tags | Additional tags to apply to any provisioned vpc resources | `map(any)` | `{}` | no |
 
 ## Outputs
 
@@ -105,6 +109,8 @@ and the CloudWatch Broker Data Log Disk Usage Alarm.
 | security\_group | The ID of the security group created for the MSK clusters |
 | vpc\_id | The ID of the VPC created |
 | zookeeper\_connect\_string | Zookeeper connection string |
+
+
 
 ## Architectural Decision Records
 
@@ -144,5 +150,3 @@ limitations under the License.
 ```
 
 Copyright &copy; 2020 [Hypr NZ](https://www.hypr.nz/)
-
-

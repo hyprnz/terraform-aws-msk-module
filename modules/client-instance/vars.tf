@@ -38,3 +38,11 @@ variable "cwagent_log_group_retention_period" {
   description = "The CloudWatch Log Group retention period in days. Defaults to `30` days"
   default     = 30
 }
+
+#tags
+
+variable "tags" {
+  description = "Additional tags to apply to all provisioned resources"
+  type        = map(any)
+  default     = {}
+}

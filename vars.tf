@@ -180,3 +180,29 @@ variable "vpc_private_subnets" {
   type        = list(string)
   default     = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
 }
+
+#module tags
+
+variable "tags" {
+  description = "Additional tags to apply to all module resources"
+  type        = map(any)
+  default     = {}
+}
+
+variable "msk_cluster_tags" {
+  description = "Additional tags to apply to msk_cluster resources"
+  type        = map(any)
+  default     = {}
+}
+
+variable "vpc_tags" {
+  description = "Additional tags to apply to any provisioned vpc resources"
+  type        = map(any)
+  default     = {}
+}
+
+variable "monitoring_tags" {
+  description = "Additional tags to apply to any provisioned monitoring/metric resources"
+  type        = map(any)
+  default     = {}
+}

@@ -11,6 +11,9 @@ module "vpc" {
   cidr_block      = var.vpc_cidr_block
   public_subnets  = var.vpc_public_subnets
   private_subnets = var.vpc_private_subnets
+
+  module_tags = var.tags
+  vpc_tags    = var.vpc_tags
 }
 
 resource "aws_msk_cluster" "this" {
@@ -57,9 +60,7 @@ resource "aws_msk_cluster" "this" {
     }
   }
 
-  tags = {
-    Name = local.cluster_name
-  }
+  tags = merge(map("Name", local.cluster_name), var.msk_cluster_tags, var.tags)
 }
 
 resource "aws_msk_configuration" "this" {
