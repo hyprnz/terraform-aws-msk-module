@@ -1,8 +1,7 @@
 # Terraform
 .terraform
 **/.terraform/*
-*.tfstate
-*.tfstate.backup
+*.tfstate*
 
 # Terragrunt Cache
 .terragrunt-cache/

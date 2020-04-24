@@ -11,7 +11,7 @@ Accepted
 Terraform has recently released version v0.12. [Upgrading to Terraform
 v0.12](https://www.terraform.io/upgrade-guides/0-12.html) is significantly more
 effort than previous Terraform upgrades due to a number of
-[incompatabilities](https://www.terraform.io/upgrade-guides/0-12.html).
+[incompatibilities](https://www.terraform.io/upgrade-guides/0-12.html).
 
 Hypr has clients using the v0.11 of modules at this time. Whilst these clients
 continue to use v0.11 modules, any new modules created should also be available
@@ -27,7 +27,7 @@ This module will support both Terraform v0.11 and v0.12 module users.
 
 The `master` branch of this module will contain the v0.12 version of this
 module, whilst a `0.11` branch will hold the v0.11 version. This is a common
-pattern prevelant in the Terraform Module community at this time.
+pattern prevalent in the Terraform Module community at this time.
 
 Users should still be encouraged to upgrade their Terraform to v0.12, but by
 providing a v0.11 version of the module they do not miss out on the
@@ -43,5 +43,5 @@ When using the v0.11 version of the module users will need to incorporate the
 branch into there source definition. Documentation on this should be provided in
 the usage section.
 
-Due to limitations with optional arguements, and the number of optional
-arguements the [Terraform AWS MKS Cluster Resource](https://www.terraform.io/docs/providers/aws/r/msk_cluster.html) the v0.11 version of the module may become far more complex than the v0.12 version of the module.
+Due to limitations with optional arguments, and the number of optional
+arguments the [Terraform AWS MKS Cluster Resource](https://www.terraform.io/docs/providers/aws/r/msk_cluster.html) the v0.11 version of the module may become far more complex than the v0.12 version of the module.
