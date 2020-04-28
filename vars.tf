@@ -84,6 +84,17 @@ variable "enhanced_monitoring_level" {
   default     = "DEFAULT"
 }
 
+variable "msk_broker_log_group_name" {
+  description = "The name of the CloudWatch log group where the MSK broker logs are sent. Defaults to `/aws/msk/{cluster_name}/brokers`"
+  type        = string
+  default     = ""
+}
+
+variable "msk_broker_log_group_retention_period" {
+  description = "The CloudWatch Log Group retention period in days. Defaults to `30` days"
+  default     = 30
+}
+
 ## Configuration
 
 variable "custom_configuration_name" {

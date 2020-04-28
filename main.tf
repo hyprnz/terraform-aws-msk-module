@@ -1,3 +1,7 @@
+locals {
+  msk_broker_log_group_name = length(var.msk_broker_log_group_name) > 0 ? var.msk_broker_log_group_name : format("/aws/msk/${local.cluster_name}/brokers")
+}
+
 module "vpc" {
   source = "./modules/vpc"
 
@@ -60,6 +64,15 @@ resource "aws_msk_cluster" "this" {
     }
   }
 
+  logging_info {
+    broker_logs {
+      cloudwatch_logs {
+        enabled   = true
+        log_group = aws_cloudwatch_log_group.msk_broker_log_group.name
+      }
+    }
+  }
+
   tags = merge(map("Name", local.cluster_name), var.msk_cluster_tags, var.tags)
 }
 
@@ -73,4 +86,11 @@ resource "aws_msk_configuration" "this" {
   server_properties = <<PROPERTIES
   ${var.server_properties}
 PROPERTIES
+}
+
+resource "aws_cloudwatch_log_group" "msk_broker_log_group" {
+  name              = local.msk_broker_log_group_name
+  retention_in_days = var.msk_broker_log_group_retention_period
+
+  tags = merge(map("Name", local.cluster_name), var.msk_cluster_tags, var.tags)
 }
