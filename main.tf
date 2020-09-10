@@ -85,7 +85,7 @@ resource "random_string" "suffix" {
 resource "aws_msk_configuration" "this" {
   count          = local.count_msk_configuration
   kafka_versions = [local.kafka_version]
-
+  # Added ranodimise name due problem with https://github.com/terraform-providers/terraform-provider-aws/issues/9082
   name        = "${var.custom_configuration_name}-${random_string.suffix.result}"
   description = "${var.custom_configuration_description} ${timestamp()}"
 
