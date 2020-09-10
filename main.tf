@@ -31,7 +31,8 @@ resource "aws_msk_cluster" "this" {
     instance_type   = local.broker_node_instance_type
     ebs_volume_size = local.broker_ebs_volume_size
     client_subnets  = local.client_subnets
-    security_groups = concat(local.security_groups, list(aws_security_group.msk_cluster.id))
+    security_groups = var.security_groups
+    #security_groups = concat(local.security_groups, list(aws_security_group.msk_cluster.id))
   }
 
   encryption_info {
@@ -76,12 +77,17 @@ resource "aws_msk_cluster" "this" {
   tags = merge(map("Name", local.cluster_name), var.msk_cluster_tags, var.tags)
 }
 
+resource "random_string" "suffix" {
+  length  = 8
+  special = false
+}
+
 resource "aws_msk_configuration" "this" {
   count          = local.count_msk_configuration
   kafka_versions = [local.kafka_version]
 
-  name        = var.custom_configuration_name
-  description = var.custom_configuration_description
+  name        = "${var.custom_configuration_name}-${random_string.suffix.result}"
+  description = "${var.custom_configuration_description} ${timestamp()}"
 
   server_properties = <<PROPERTIES
   ${var.server_properties}

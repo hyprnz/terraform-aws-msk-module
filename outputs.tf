@@ -16,16 +16,16 @@ output "private_subnets" {
   depends_on  = [module.vpc]
 }
 
-output "security_group" {
-  description = "The ID of the security group created for the MSK clusters"
-  value       = module.vpc.default_security_group
-  depends_on  = [module.vpc]
-}
-
-output "msk_security_group_id" {
-  description = "MSK Cluster Security Group ID"
-  value       = aws_security_group.msk_cluster.id
-}
+#output "security_group" {
+#  description = "The ID of the security group created for the MSK clusters"
+#  value       = module.vpc.default_security_group
+#  depends_on  = [module.vpc]
+#}
+#
+#output "msk_security_group_id" {
+#  description = "MSK Cluster Security Group ID"
+#  value       = aws_security_group.msk_cluster.id
+#}
 
 output "arn" {
   description = "The ARN for the MSK Cluster"

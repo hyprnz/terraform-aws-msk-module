@@ -106,7 +106,7 @@ variable "custom_configuration_name" {
 variable "custom_configuration_description" {
   description = "Description of the MSK Custom configuration"
   type        = string
-  default     = "Custom MSK Configuration Example properties"
+  default     = "Custom MSK Configuration properties"
 }
 
 variable "msk_configuration_arn" {
