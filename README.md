@@ -81,6 +81,7 @@ and the CloudWatch Broker Data Log Disk Usage Alarm.
 | num\_of\_broker\_nodes | Desired total number of broker nodes in the kafka cluster. It must be a multiple of the number of specified client subnets | `number` | `3` | no |
 | s3\_logging\_bucket | Which s3 bucket to use for logging | `string` | `""` | no |
 | s3\_logging\_enabled | Whether logging to s3 bucket is enabled | `bool` | `false` | no |
+| s3\_logging\_prefix | Prefix for s3 bucket logging | `string` | `"logs/msk"` | no |
 | security\_groups | A list of the security groups to associate with the elastic network interfaces to control who can communicate with the cluster | `list(string)` | `[]` | no |
 | server\_properties | Contents of the server.properties file for Kafka broker | `string` | `"auto.create.topics.enable = false\ndefault.replication.factor = 3\ndelete.topic.enable = true\nmin.insync.replicas = 2\nnum.io.threads = 8\nnum.network.threads = 5\nnum.partitions = 1\nnum.replica.fetchers = 2\nsocket.request.max.bytes = 104857600\nunclean.leader.election.enable = true\n"` | no |
 | tags | Additional tags to apply to all module resources | `map(any)` | `{}` | no |

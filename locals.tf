@@ -47,4 +47,5 @@ locals {
 
   s3_logging_enabled = var.s3_logging_enabled
   s3_logging_bucket  = var.s3_logging_bucket
+  s3_logging_prefix  = var.s3_logging_prefix
 }

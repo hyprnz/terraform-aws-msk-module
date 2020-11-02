@@ -155,7 +155,12 @@ variable "s3_logging_enabled" {
 
 variable "s3_logging_bucket" {
   description = "S3 Logging Bucket"
-  default     = false
+  default     = ""
+}
+
+variable "s3_logging_prefix" {
+  description = "S3 Logging Prefix"
+  default     = "logs/msk"
 }
 
 ## Dashboard

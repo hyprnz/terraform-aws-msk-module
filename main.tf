@@ -73,7 +73,7 @@ resource "aws_msk_cluster" "this" {
       s3 {
         enabled = local.s3_logging_enabled
         bucket  = local.s3_logging_bucket
-        prefix  = "logs/msk"
+        prefix  = local.s3_logging_prefix
       }
     }
   }
