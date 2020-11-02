@@ -71,12 +71,16 @@ and the CloudWatch Broker Data Log Disk Usage Alarm.
 | encryption\_kms\_key\_arn | KMS key short ID or ARN to use for encrypting your data at rest. If no key is specified an AWS managed KMS key will be used for encrypting the data at rest | `string` | `""` | no |
 | enhanced\_monitoring\_level | Desired enhanced MSK CloudWatch monitoring level. Valid values are DEFAULT, PER\_BROKER, or PER\_TOPIC\_PER\_BROKER | `string` | `"DEFAULT"` | no |
 | in\_cluster\_encryption | Whether data communication among broker nodes is encrypted | `bool` | `true` | no |
+| jmx\_exporter\_enabled | Whether Prometheus JMX export is enabled | `bool` | `false` | no |
 | kafka\_version | Desired Kafka software version | `string` | `"2.2.1"` | no |
 | monitoring\_tags | Additional tags to apply to any provisioned monitoring/metric resources | `map(any)` | `{}` | no |
 | msk\_cluster\_tags | Additional tags to apply to msk\_cluster resources | `map(any)` | `{}` | no |
 | msk\_configuration\_arn | ARN of the MSK Configuration to use in the cluster | `string` | `""` | no |
 | msk\_configuration\_revision | Revision of the MSK Configuration to use in the cluster | `number` | `1` | no |
+| node\_exporter\_enabled | Whether Prometheus JMX export is enabled | `bool` | `false` | no |
 | num\_of\_broker\_nodes | Desired total number of broker nodes in the kafka cluster. It must be a multiple of the number of specified client subnets | `number` | `3` | no |
+| s3\_logging\_bucket | Which s3 bucket to use for logging | `string` | `""` | no |
+| s3\_logging\_enabled | Whether logging to s3 bucket is enabled | `bool` | `false` | no |
 | security\_groups | A list of the security groups to associate with the elastic network interfaces to control who can communicate with the cluster | `list(string)` | `[]` | no |
 | server\_properties | Contents of the server.properties file for Kafka broker | `string` | `"auto.create.topics.enable = false\ndefault.replication.factor = 3\ndelete.topic.enable = true\nmin.insync.replicas = 2\nnum.io.threads = 8\nnum.network.threads = 5\nnum.partitions = 1\nnum.replica.fetchers = 2\nsocket.request.max.bytes = 104857600\nunclean.leader.election.enable = true\n"` | no |
 | tags | Additional tags to apply to all module resources | `map(any)` | `{}` | no |

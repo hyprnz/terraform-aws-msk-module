@@ -41,4 +41,10 @@ locals {
   custom_dashboard = var.custom_dashboard_template
 
   dashboard_template = length(local.custom_dashboard) > 0 ? local.custom_dashboard : "${path.module}/templates/dashboard-default.tpl"
+
+  jmx_exporter_enabled  = var.jmx_exporter_enabled
+  node_exporter_enabled = var.node_exporter_enabled
+
+  s3_logging_enabled = var.s3_logging_enabled
+  s3_logging_bucket  = var.s3_logging_bucket
 }
