@@ -77,7 +77,7 @@ and the CloudWatch Broker Data Log Disk Usage Alarm.
 | msk\_cluster\_tags | Additional tags to apply to msk\_cluster resources | `map(any)` | `{}` | no |
 | msk\_configuration\_arn | ARN of the MSK Configuration to use in the cluster | `string` | `""` | no |
 | msk\_configuration\_revision | Revision of the MSK Configuration to use in the cluster | `number` | `1` | no |
-| node\_exporter\_enabled | Whether Prometheus JMX export is enabled | `bool` | `false` | no |
+| node\_exporter\_enabled | Whether Prometheus node export is enabled | `bool` | `false` | no |
 | num\_of\_broker\_nodes | Desired total number of broker nodes in the kafka cluster. It must be a multiple of the number of specified client subnets | `number` | `3` | no |
 | s3\_logging\_bucket | Which s3 bucket to use for logging | `string` | `""` | no |
 | s3\_logging\_enabled | Whether logging to s3 bucket is enabled | `bool` | `false` | no |
