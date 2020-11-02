@@ -138,6 +138,31 @@ unclean.leader.election.enable = true
 EOF
 }
 
+variable "jmx_exporter_enabled" {
+  description = "JMX exporter enabled"
+  default     = false
+}
+
+variable "node_exporter_enabled" {
+  description = "Node exporter enabled"
+  default     = false
+}
+
+variable "s3_logging_enabled" {
+  description = "S3 Logging Enabled"
+  default     = false
+}
+
+variable "s3_logging_bucket" {
+  description = "S3 Logging Bucket"
+  default     = ""
+}
+
+variable "s3_logging_prefix" {
+  description = "S3 Logging Prefix"
+  default     = "logs/msk"
+}
+
 ## Dashboard
 variable "create_dashboard" {
   description = "Whether or not to create the MSK Dashboard"

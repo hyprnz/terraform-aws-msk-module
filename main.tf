@@ -70,6 +70,22 @@ resource "aws_msk_cluster" "this" {
         enabled   = true
         log_group = aws_cloudwatch_log_group.msk_broker_log_group.name
       }
+      s3 {
+        enabled = local.s3_logging_enabled
+        bucket  = local.s3_logging_bucket
+        prefix  = local.s3_logging_prefix
+      }
+    }
+  }
+
+  open_monitoring {
+    prometheus {
+      jmx_exporter {
+        enabled_in_broker = local.jmx_exporter_enabled
+      }
+      node_exporter {
+        enabled_in_broker = local.node_exporter_enabled
+      }
     }
   }
 
