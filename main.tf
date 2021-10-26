@@ -89,6 +89,10 @@ resource "aws_msk_cluster" "this" {
     }
   }
 
+  lifecycle {
+    prevent_destroy = true
+  }
+
   tags = merge(map("Name", local.cluster_name), var.msk_cluster_tags, var.tags)
 }
 
