@@ -1,5 +1,7 @@
 # Amazon MSK Terraform Module
 
+**This module is no longer being maintained** <br/>
+
 Terraform module to provision an Amazon Managed Streaming for Apache Kafka
 Cluster in AWS. An [Amazon MSK](https://aws.amazon.com/msk/) Cluster requires a
 VPC to run the Broker instances in. This module provides an [Internal VPC](./modules/vpc) to
